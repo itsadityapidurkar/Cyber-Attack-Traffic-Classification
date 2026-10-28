@@ -261,7 +261,21 @@ st.markdown("""
 # Model Loading Function
 @st.cache_resource(show_spinner=False)
 def load_soc_model():
-    model_path = os.path.join(os.path.dirname(__file__), "model.pkl")
+    base_dir = os.path.dirname(__file__)
+    model_path = os.path.join(base_dir, "model.pkl")
+    
+    # Auto-reassemble split parts if model.pkl was cloned via Git chunks
+    if not os.path.exists(model_path):
+        part_files = sorted([os.path.join(base_dir, f) for f in os.listdir(base_dir) if f.startswith("model.pkl.part_")])
+        if part_files:
+            try:
+                with open(model_path, "wb") as f_out:
+                    for pf in part_files:
+                        with open(pf, "rb") as f_in:
+                            f_out.write(f_in.read())
+            except Exception as e:
+                return None, f"Failed to assemble model parts: {e}"
+
     if not os.path.exists(model_path):
         return None, f"Model artifact not found at {model_path}."
     try:

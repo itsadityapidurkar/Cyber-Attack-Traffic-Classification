@@ -169,9 +169,9 @@ Open `http://localhost:8501` in your browser.
 ├── train_unified_model.py         # Training pipeline for 2017 + 2018 datasets
 ├── train_super_unified_model.py   # Multi-dataset pipeline (DDoS2019 + ToN-IoT)
 ├── train_ot_cps_models.py         # Training pipeline for SWaT and WADI OT models
-├── model.pkl                      # Serialized production classifier package
-├── model_swat_ot.pkl              # Serialized SWaT OT anomaly model
-├── model_wadi_ot.pkl              # Serialized WADI OT anomaly model
+├── model.pkl.part_*             # Multi-dataset 494MB production classifier (auto-reassembled on launch)
+├── model_swat_ot.pkl              # Serialized SWaT OT anomaly model (51 sensor tags)
+├── model_wadi_ot.pkl              # Serialized WADI OT anomaly model (103 distribution tags)
 ├── test_batches/                  # Sample CSV and PCAP test files
 │   ├── batch_1_mixed_threat_sample.csv
 │   ├── batch_2_dos_ddos_incident.csv

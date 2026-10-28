@@ -13,3 +13,5 @@ __pycache__/
 .ipynb_checkpoints/
 model_2017_backup.pkl
 model_backup_2018.pkl
+model.pkl
+!model.pkl.part_*
