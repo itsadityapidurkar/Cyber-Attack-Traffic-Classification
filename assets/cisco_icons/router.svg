@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+      <!-- Cisco Router: Blue cylinder with 4 characteristic cross arrows -->
+      <ellipse cx="50" cy="28" rx="44" ry="18" fill="#1e40af" stroke="#60a5fa" stroke-width="2"/>
+      <path d="M6,28 v40 c0,10 20,18 44,18 c24,0 44,-8 44,-18 v-40" fill="#1d4ed8" stroke="#3b82f6" stroke-width="2"/>
+      <ellipse cx="50" cy="68" rx="44" ry="18" fill="none" stroke="#60a5fa" stroke-width="1.5" stroke-dasharray="3,3"/>
+      <!-- 4 Cisco in/out arrows on top surface -->
+      <!-- Left arrow -->
+      <path d="M22,28 L34,28 M22,28 L27,24 M22,28 L27,32" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- Right arrow -->
+      <path d="M78,28 L66,28 M78,28 L73,24 M78,28 L73,32" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- Top arrow -->
+      <path d="M50,16 L50,23 M50,16 L46,20 M50,16 L54,20" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- Bottom arrow -->
+      <path d="M50,40 L50,33 M50,40 L46,36 M50,40 L54,36" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>

@@ -1,0 +1,15 @@
+*.zip
+*.parquet
+*.tar.gz
+data_2018/
+data_ddos2019/
+data_toniot/
+data_swat/
+data_wadi/
+dataset_2018_balanced.csv
+dataset.csv
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+model_2017_backup.pkl
+model_backup_2018.pkl

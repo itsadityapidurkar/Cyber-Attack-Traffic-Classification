@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 95">
+      <!-- Cisco Packet Tracer Rack Server -->
+      <rect x="10" y="10" width="60" height="75" rx="4" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+      <!-- Bay 1 -->
+      <rect x="15" y="16" width="50" height="18" rx="2" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+      <circle cx="22" cy="25" r="2.5" fill="#22c55e"/>
+      <circle cx="29" cy="25" r="2.5" fill="#3b82f6"/>
+      <line x1="38" y1="25" x2="58" y2="25" stroke="#64748b" stroke-width="2" stroke-dasharray="3,2"/>
+      <!-- Bay 2 -->
+      <rect x="15" y="38" width="50" height="18" rx="2" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+      <circle cx="22" cy="47" r="2.5" fill="#22c55e"/>
+      <circle cx="29" cy="47" r="2.5" fill="#ef4444"/>
+      <line x1="38" y1="47" x2="58" y2="47" stroke="#64748b" stroke-width="2" stroke-dasharray="3,2"/>
+      <!-- Bay 3 -->
+      <rect x="15" y="60" width="50" height="18" rx="2" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+      <circle cx="22" cy="69" r="2.5" fill="#22c55e"/>
+      <circle cx="29" cy="69" r="2.5" fill="#22c55e"/>
+      <line x1="38" y1="69" x2="58" y2="69" stroke="#64748b" stroke-width="2" stroke-dasharray="3,2"/>
+    </svg>

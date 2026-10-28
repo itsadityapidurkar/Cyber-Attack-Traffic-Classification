@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 70">
+      <!-- Cisco Switch: Slate/Cyan rectangle with bidirectional parallel arrows -->
+      <polygon points="5,20 25,5 95,5 75,20" fill="#334155" stroke="#64748b" stroke-width="1.5"/>
+      <polygon points="75,20 95,5 95,50 75,65" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+      <rect x="5" y="20" width="70" height="45" rx="2" fill="#0284c7" stroke="#38bdf8" stroke-width="2"/>
+      <!-- Switch port activity LEDs -->
+      <circle cx="15" cy="28" r="2" fill="#22c55e"/>
+      <circle cx="23" cy="28" r="2" fill="#22c55e"/>
+      <circle cx="31" cy="28" r="2" fill="#eab308"/>
+      <circle cx="39" cy="28" r="2" fill="#22c55e"/>
+      <!-- Cisco Switch Arrows -->
+      <path d="M15,44 L60,44 M15,44 L22,39 M15,44 L22,49" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M60,54 L15,54 M60,54 L53,49 M60,54 L53,59" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
