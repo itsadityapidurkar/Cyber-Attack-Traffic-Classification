@@ -1220,11 +1220,60 @@ with tab_telemetry:
 with tab_system:
     st.markdown('<div class="soc-panel-title">SOC Pipeline Architecture</div>', unsafe_allow_html=True)
     
+    # Monochromatic Architecture Diagram Rendering
+    mermaid_diag_html = """
+    <div style="background: #ffffff; padding: 24px; border: 2px solid #000000; border-radius: 4px; margin-bottom: 24px;">
+        <div style="text-align: center; border-bottom: 2px solid #000000; padding-bottom: 10px; margin-bottom: 16px;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700; color: #000000; letter-spacing: 0.08em; text-transform: uppercase;">System Architecture Specification</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #333333;">Monochromatic End-to-End Enterprise NIDS & Cyber-Physical Pipeline</div>
+        </div>
+        <div class="mermaid" style="text-align: center;">
+flowchart TD
+    INGEST["<b>1. TELEMETRY & INGESTION LAYER</b><br/>• Raw Packet Captures (.pcap / .pcapng via Scapy)<br/>• Live Promiscuous Network Tap (Zero-Buffer Capture)<br/>• Pre-computed Flow Records (CICFlowMeter 78-CSV)<br/>• Industrial Sensor Telemetry (SWaT / WADI Streams)"]
+    
+    PREPROC["<b>2. RECONSTRUCTION & FEATURE NORMALIZATION</b><br/>• Bi-Directional 5-Tuple Session Grouping (IP, Port, Protocol)<br/>• Forward & Backward Inter-Arrival Time (IAT) Statistics<br/>• TCP Flag Analysis (SYN, FIN, RST, PSH, ACK, URG)<br/>• Robust Median Imputation & 78-Dimensional Vector Alignment"]
+    
+    CLASSIFY["<b>3. MULTI-DOMAIN CLASSIFICATION ENGINES</b><br/>• Enterprise NIDS: Regularized Balanced Random Forest (100 Trees)<br/>• Cyber-Physical Anomaly Detectors: SWaT (100%) & WADI (99.98%)<br/>• Formal Hypothesis Testing: Stratified Paired t-Test (p < 0.05)"]
+    
+    ROUTER{"<b>4. THREAT TRIAGE & MITRE ATT&CK MAPPING</b><br/>Evaluate Classified Flow Vector"}
+    
+    MITRE["<b>MITRE ATT&CK Tactical Enrichment</b><br/>• Tactical Phase (C2, Initial Access, Impact, Discovery)<br/>• Technique ID (T1498.002, T1110.001, T1190, T1071)<br/>• Automated Remediation Playbooks & Severity Scoring"]
+    
+    SOC["<b>5. SOC ANALYST TERMINAL & SIMULATION</b><br/>• Real-Time Single-Flow Threat Terminal & Playbook Cards<br/>• Interactive Cisco Packet Tracer Network Topology Simulation<br/>• Dual PCAP/CSV Batch Ingestion & Forensic Incident Ledger<br/>• Benchmark Telemetry, Latency Monitor & Confusion Matrices"]
+
+    INGEST --> PREPROC
+    PREPROC --> CLASSIFY
+    CLASSIFY --> ROUTER
+    ROUTER -->|Malicious Flow| MITRE
+    ROUTER -->|Benign Traffic| SOC
+    MITRE --> SOC
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                darkMode: false,
+                background: '#ffffff',
+                primaryColor: '#ffffff',
+                primaryTextColor: '#000000',
+                primaryBorderColor: '#000000',
+                lineColor: '#000000',
+                fontFamily: 'JetBrains Mono, monospace'
+            },
+            flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'basis' }
+        });
+    </script>
+    """
+    components.html(mermaid_diag_html, height=880, scrolling=True)
+
     col_arch1, col_arch2 = st.columns(2)
     with col_arch1:
         st.markdown("""
         **Pipeline Specification:**
-        - **Source Corpus:** CIC-IDS2017 (Canadian Institute for Cybersecurity, UNB)
+        - **Source Corpora:** CIC-IDS2017, CSE-CIC-IDS2018, CIC-DDoS2019, CIC-ToN-IoT, iTrust SWaT & WADI
         - **Input Vector Space:** 78 numerical features (IAT statistics, packet lengths, TCP windowing, subflows)
         - **Primary Evaluation Metric:** Macro-averaged F1-Score (enforces unweighted evaluation across extreme class imbalances)
         - **Preprocessing Pipeline:** Invariant feature pruning, numerical bounds clipping, median imputation
@@ -1233,12 +1282,13 @@ with tab_system:
     with col_arch2:
         st.markdown("""
         **Monitored Threat Signatures:**
-        - **Denial of Service:** DoS Hulk, DoS GoldenEye, DoS slowloris, DoS Slowhttptest, DDoS
-        - **Reconnaissance:** PortScan
+        - **Denial of Service:** DoS Hulk, DoS GoldenEye, DoS slowloris, DoS Slowhttptest, DDoS (LOIC, HOIC)
+        - **Reconnaissance & Scans:** PortScan, OS Fingerprinting
         - **Authentication Probing:** FTP-Patator, SSH-Patator
-        - **Botnet Command & Control:** Ares Bot
+        - **Botnet Command & Control:** Ares Botnet, C2 Web Channels
         - **Application Layer:** Web Attack (Brute Force, XSS, SQL Injection)
-        - **Privilege & Memory Exploits:** Infiltration, Heartbleed
+        - **Privilege & Memory Exploits:** Infiltration, OpenSSL Heartbleed
+        - **Cyber-Physical OT Systems:** SWaT SCADA Water Treatment & WADI Distribution Testbed Anomaly Detection
         """)
 
 st.markdown("""

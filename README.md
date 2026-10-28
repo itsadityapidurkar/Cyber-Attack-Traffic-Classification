@@ -76,39 +76,32 @@ The models are trained and validated on standard cybersecurity and cyber-physica
 
 ## 4. System Architecture & Methodology
 
+```mermaid
+flowchart TD
+    INGEST["<b>1. TELEMETRY & INGESTION LAYER</b><br/>• Raw Packet Captures (.pcap / .pcapng via Scapy)<br/>• Live Promiscuous Network Tap (Zero-Buffer Capture)<br/>• Pre-computed Flow Records (CICFlowMeter 78-CSV)<br/>• Industrial Sensor Telemetry (SWaT / WADI Streams)"]
+    
+    PREPROC["<b>2. RECONSTRUCTION & FEATURE NORMALIZATION</b><br/>• Bi-Directional 5-Tuple Session Grouping (IP, Port, Protocol)<br/>• Forward & Backward Inter-Arrival Time (IAT) Statistics<br/>• TCP Flag Analysis (SYN, FIN, RST, PSH, ACK, URG)<br/>• Robust Median Imputation & 78-Dimensional Vector Alignment"]
+    
+    CLASSIFY["<b>3. MULTI-DOMAIN CLASSIFICATION ENGINES</b><br/>• Enterprise NIDS: Regularized Balanced Random Forest (100 Trees)<br/>• Cyber-Physical Anomaly Detectors: SWaT (100%) & WADI (99.98%)<br/>• Formal Hypothesis Testing: Stratified Paired t-Test (p < 0.05)"]
+    
+    ROUTER{"<b>4. THREAT TRIAGE & MITRE ATT&CK MAPPING</b><br/>Evaluate Classified Flow Vector"}
+    
+    MITRE["<b>MITRE ATT&CK Tactical Enrichment</b><br/>• Tactical Phase (C2, Initial Access, Impact, Discovery)<br/>• Technique ID (T1498.002, T1110.001, T1190, T1071)<br/>• Automated Remediation Playbooks & Severity Scoring"]
+    
+    SOC["<b>5. SOC ANALYST TERMINAL & SIMULATION</b><br/>• Real-Time Single-Flow Threat Terminal & Playbook Cards<br/>• Interactive Cisco Packet Tracer Network Topology Simulation<br/>• Dual PCAP/CSV Batch Ingestion & Forensic Incident Ledger<br/>• Benchmark Telemetry, Latency Monitor & Confusion Matrices"]
+
+    INGEST --> PREPROC
+    PREPROC --> CLASSIFY
+    CLASSIFY --> ROUTER
+    ROUTER -->|Malicious Flow| MITRE
+    ROUTER -->|Benign Traffic| SOC
+    MITRE --> SOC
 ```
-+-------------------------------------------------------------------------+
-|                          Data Ingestion Layer                           |
-|   - Raw Packet Capture (.pcap / .pcapng) via Scapy Dissection           |
-|   - Flow Summaries (.csv) via 78-Feature CICFlowMeter Alignment         |
-|   - Industrial Sensor Telemetry (SWaT / WADI CSV streams)               |
-+-------------------------------------------------------------------------+
-                                     |
-                                     v
-+-------------------------------------------------------------------------+
-|                       Feature Engineering Pipeline                      |
-|   - 5-Tuple Conversation Grouping (Src/Dst IP, Src/Dst Port, Protocol)  |
-|   - Forward/Backward Inter-Arrival Time (IAT) Statistics                |
-|   - TCP Flag Counting (SYN, FIN, RST, PSH, ACK, URG)                    |
-|   - Median Imputation & Feature Alignment to 78 Vector Dimensions       |
-+-------------------------------------------------------------------------+
-                                     |
-                                     v
-+-------------------------------------------------------------------------+
-|                        Classification Engines                           |
-|   - Enterprise & Cloud NIDS: Balanced Random Forest (100 Estimators)    |
-|   - OT / CPS Detectors: SWaT SCADA Model & WADI Distribution Model      |
-|   - Validation: 5-Fold Stratified Paired t-Test (p < 0.05)              |
-+-------------------------------------------------------------------------+
-                                     |
-                                     v
-+-------------------------------------------------------------------------+
-|                  Interactive Streamlit SOC Dashboard                    |
-|   - Single-Flow Real-Time Inference with Confidence Telemetry           |
-|   - Dual PCAP + CSV Batch Intake & Incident Ledger Export               |
-|   - Cisco Packet Tracer Animated Network Simulator (HTML5 Canvas)       |
-+-------------------------------------------------------------------------+
-```
+
+<div align="center">
+  <img src="screenshots/04_system_architecture.png" alt="Monochromatic System Architecture Diagram" width="750" />
+  <p><em>Figure 1: Monochromatic End-to-End System Architecture Specification.</em></p>
+</div>
 
 ---
 
