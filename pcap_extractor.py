@@ -120,14 +120,44 @@ def extract_flows_from_pcap(pcap_path_or_bytes, feature_names=None):
             flow_data['bwd_win'].append(win_size)
             flow_data['bwd_hdr_len'] += hdr_len
 
+        info_str = ""
+        if pkt.haslayer(scapy.TCP):
+            flag_chars = []
+            f_val = int(pkt[scapy.TCP].flags)
+            if f_val & 0x02: flag_chars.append("SYN")
+            if f_val & 0x01: flag_chars.append("FIN")
+            if f_val & 0x04: flag_chars.append("RST")
+            if f_val & 0x08: flag_chars.append("PSH")
+            if f_val & 0x10: flag_chars.append("ACK")
+            if f_val & 0x20: flag_chars.append("URG")
+            flags_str = ",".join(flag_chars) if flag_chars else "None"
+            info_str = f"TCP {sport} -> {dport} [{flags_str}] Seq={pkt[scapy.TCP].seq} Ack={pkt[scapy.TCP].ack} Win={win_size} Len={pkt_len}"
+        elif pkt.haslayer(scapy.UDP):
+            info_str = f"UDP {sport} -> {dport} Len={pkt_len}"
+        elif pkt.haslayer(scapy.ICMP):
+            info_str = f"ICMP Type={pkt[scapy.ICMP].type} Code={pkt[scapy.ICMP].code} Len={pkt_len}"
+        else:
+            info_str = f"IP Proto={proto} {src_ip} -> {dst_ip} Len={pkt_len}"
+
+        raw_bytes = bytes(pkt)
+        hex_dump_lines = []
+        for h_i in range(0, min(len(raw_bytes), 128), 16):
+            chunk = raw_bytes[h_i:h_i+16]
+            hex_part = " ".join(f"{b:02x}" for b in chunk)
+            ascii_part = "".join(chr(b) if 32 <= b < 127 else "." for b in chunk)
+            hex_dump_lines.append(f"{h_i:04x}   {hex_part:<47}   {ascii_part}")
+        hex_dump = "\n".join(hex_dump_lines)
+
         packet_meta.append({
             'timestamp': pkt_time,
             'src_ip': src_ip,
             'dst_ip': dst_ip,
             'src_port': sport,
             'dst_port': dport,
-            'protocol': 'TCP' if proto == 6 else ('UDP' if proto == 17 else str(proto)),
-            'length': pkt_len
+            'protocol': 'TCP' if proto == 6 else ('UDP' if proto == 17 else ('ICMP' if proto == 1 else str(proto))),
+            'length': pkt_len,
+            'info': info_str,
+            'hex_dump': hex_dump
         })
 
     # Convert flows into 78-feature dictionary records

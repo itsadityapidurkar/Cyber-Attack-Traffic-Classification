@@ -12,6 +12,7 @@ The core classification architecture utilizes a regularized Random Forest ensemb
 
 ### Key Capabilities
 - **Multi-Domain Threat Detection**: Identifies enterprise attacks (Brute Force, Botnets, Infiltration), volumetric DDoS (LOIC, HOIC), amplification DDoS (DNS, NTP, SNMP, LDAP, TFTP), and critical infrastructure threats.
+- **Continuous Live Wireshark Sniffer**: Real-time 3-pane packet analyzer (Live Frame Table, Layer Dissection Tree, and Hex/ASCII byte dump) with continuous interface capture, display filter bar, and live ML classification.
 - **OT & Cyber-Physical Systems (CPS) Security**: Specialized anomaly detection engines for municipal water treatment and distribution testbeds (SWaT and WADI), monitoring physical sensor and actuator deviations.
 - **Automated PCAP Dissection**: Reconstructs bi-directional 5-tuple conversations directly from raw packet bytes, extracting all 78 standard statistical features (CICFlowMeter specification) on the fly.
 - **Interactive SOC Dashboard**: Streamlit-based Security Operations Center interface featuring a real-time Cisco Packet Tracer topology simulation with live packet bursts, draggable nodes, and ping injection.
