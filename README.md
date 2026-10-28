@@ -184,7 +184,6 @@ Open `http://localhost:8501` in your browser.
 │   ├── cloud.svg
 │   ├── pc.svg
 │   └── server.svg
-├── Report.docx                    # Academic project report conforming to university format
 ├── requirements.txt               # Python package dependencies
 └── README.md                      # Project documentation
 ```
